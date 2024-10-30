@@ -4,6 +4,7 @@ version = "0.0.0"
 authors = [
     "cyphersnake cyphersnake@pm.me",
 ]
+repository = "https://github.com/cyphersnake/sparse-merkle-tree-server-client"
 edition = "2021"
 license = "MIT"
 
