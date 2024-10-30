@@ -7,4 +7,13 @@ authors = [
 edition = "2021"
 license = "MIT"
 
+
+[[bin]]
+name = "tree_keeper"
+path = "src/tree_keeper.rs"
+
+[[bin]]
+name = "changer"
+path = "src/changer.rs"
+
 [dependencies]
