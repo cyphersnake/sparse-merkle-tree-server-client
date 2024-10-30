@@ -23,7 +23,7 @@ struct Args {
 
     /// Show the full proof received from the tree keeper
     #[arg(short, long)]
-    show_proof: bool,
+    verbose: bool,
 }
 
 // `dead_code` because rust doesn't realize that `main` returning this type
@@ -42,7 +42,7 @@ fn main() -> Result<(), Error> {
         host,
         leaf_index,
         new_data,
-        show_proof,
+        verbose,
     } = Args::parse();
 
     let stream = TcpStream::connect(host).map_err(Error::CantConnectToTreeKeeper)?;
@@ -64,7 +64,7 @@ fn main() -> Result<(), Error> {
                 let old_root = proof.root().old;
                 let new_root = proof.root().new;
 
-                if show_proof {
+                if verbose {
                     println!("change tree successfully {old_root} -> {new_root}: {proof:?}");
                 } else {
                     println!("change tree successfully {old_root} -> {new_root}");
