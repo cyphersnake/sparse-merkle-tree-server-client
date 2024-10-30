@@ -1,0 +1,10 @@
+[package]
+name = "poly_project"
+version = "0.0.0"
+authors = [
+    "cyphersnake cyphersnake@pm.me",
+]
+edition = "2021"
+license = "MIT"
+
+[dependencies]
