@@ -3,7 +3,7 @@ use std::net::TcpListener;
 use clap::Parser;
 use tracing::*;
 
-use poly_project::{
+use sparse_merkle_tree_server_client::{
     protocol::{bincode, Request, Response},
     Tree,
 };

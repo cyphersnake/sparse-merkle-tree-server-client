@@ -2,7 +2,7 @@
 ///
 /// # Simple Example
 /// ```
-/// let mut tr = poly_project::Tree::default();
+/// let mut tr = sparse_merkle_tree_server_client::Tree::default();
 /// println!("Default root is {}", tr.get_root());
 ///
 /// let pr1 = tr.update_leaf(3, 1);

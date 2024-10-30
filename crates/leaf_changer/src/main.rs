@@ -1,7 +1,7 @@
 use std::{io, net::TcpStream};
 
 use clap::Parser;
-use poly_project::{
+use sparse_merkle_tree_server_client::{
     protocol::{bincode, Request, Response},
     Data, Proof,
 };

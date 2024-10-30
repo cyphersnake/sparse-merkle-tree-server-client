@@ -233,7 +233,7 @@ name = "leaf_changer"
 version = "0.0.0"
 dependencies = [
  "clap",
- "poly_project",
+ "sparse_merkle_tree_server_client",
 ]
 
 [[package]]
@@ -290,19 +290,6 @@ name = "pin-project-lite"
 version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "915a1e146535de9163f3987b8944ed8cf49a18bb0056bcebcdcece385cece4ff"
-
-[[package]]
-name = "poly_project"
-version = "0.0.0"
-dependencies = [
- "bincode",
- "itertools",
- "rand",
- "serde",
- "sha3",
- "tracing",
- "tracing-test",
-]
 
 [[package]]
 name = "ppv-lite86"
@@ -451,6 +438,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3c5e1a9a646d36c3599cd173a41282daf47c44583ad367b8e6837255952e5c67"
 
 [[package]]
+name = "sparse_merkle_tree_server_client"
+version = "0.0.0"
+dependencies = [
+ "bincode",
+ "itertools",
+ "rand",
+ "serde",
+ "sha3",
+ "tracing",
+ "tracing-test",
+]
+
+[[package]]
 name = "strsim"
 version = "0.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -564,7 +564,7 @@ name = "tree_keeper"
 version = "0.0.0"
 dependencies = [
  "clap",
- "poly_project",
+ "sparse_merkle_tree_server_client",
  "tracing",
  "tracing-subscriber",
 ]

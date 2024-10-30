@@ -185,10 +185,7 @@ impl NodeUpdate {
         }
     }
 
-    pub fn try_map<E>(
-        self,
-        mut f: impl FnMut(Data) -> Result<Data, E>,
-    ) -> Result<NodeUpdate, E> {
+    pub fn try_map<E>(self, mut f: impl FnMut(Data) -> Result<Data, E>) -> Result<NodeUpdate, E> {
         Ok(NodeUpdate {
             index: self.index,
             old: f(self.old)?,

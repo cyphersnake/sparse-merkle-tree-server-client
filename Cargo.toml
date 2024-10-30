@@ -1,5 +1,5 @@
 [package]
-name = "poly_project"
+name = "sparse_merkle_tree_server_client"
 version = "0.0.0"
 authors = [
     "cyphersnake cyphersnake@pm.me",
