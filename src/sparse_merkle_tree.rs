@@ -162,7 +162,7 @@ pub struct Tree {
     default_values: [Data; DEPTH_SIZE],
 }
 
-#[derive(Debug, Clone, serde::Serialize)]
+#[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
 pub struct NodeUpdate {
     /// Index of node in a level
     pub index: u32,
@@ -198,7 +198,7 @@ impl NodeUpdate {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize)]
+#[derive(Debug, Clone, serde::Deserialize, serde::Serialize)]
 pub struct Proof {
     path: [NodeUpdate; DEPTH_SIZE],
 }

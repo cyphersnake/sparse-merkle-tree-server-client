@@ -1,14 +1,15 @@
-use serde::Serialize;
+pub use bincode;
+use serde::{Deserialize, Serialize};
 
 use crate::{Data, Proof};
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Request {
-    UpdateLeaf { leaf_index: usize, new_data: Data },
+    UpdateLeaf { leaf_index: u32, new_data: Data },
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Response {
-    Updated { proof: Proof },
+    Err { msg: String },
+    Updated { proof: Box<Proof> },
 }
-

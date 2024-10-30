@@ -46,6 +46,7 @@ name = "changer"
 version = "0.0.0"
 dependencies = [
  "poly_project",
+ "tracing",
 ]
 
 [[package]]
@@ -450,6 +451,7 @@ name = "tree_keeper"
 version = "0.0.0"
 dependencies = [
  "poly_project",
+ "tracing",
 ]
 
 [[package]]

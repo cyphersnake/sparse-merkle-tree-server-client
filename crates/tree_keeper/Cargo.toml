@@ -4,3 +4,4 @@ edition = "2021"
 
 [dependencies]
 poly_project = { path = "../.." }
+tracing = { workspace = true }
