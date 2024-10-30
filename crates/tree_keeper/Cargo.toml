@@ -3,5 +3,8 @@ name = "tree_keeper"
 edition = "2021"
 
 [dependencies]
-poly_project = { path = "../.." }
+clap = { workspace = true }
 tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+poly_project = { path = "../.." }

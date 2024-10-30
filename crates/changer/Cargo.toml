@@ -3,5 +3,6 @@ name = "changer"
 edition = "2021"
 
 [dependencies]
+clap = { workspace = true }
+
 poly_project = { path = "../.." }
-tracing = { workspace = true }

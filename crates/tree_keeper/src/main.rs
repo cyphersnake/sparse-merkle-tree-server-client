@@ -1,5 +1,6 @@
 use std::net::TcpListener;
 
+use clap::Parser;
 use tracing::*;
 
 use poly_project::{
@@ -7,8 +8,19 @@ use poly_project::{
     Tree,
 };
 
+#[derive(Parser, Debug)]
+#[command(version, about, long_about = None)]
+struct Args {
+    #[arg(short, long, default_value = "127.0.0.1:7878")]
+    host: String,
+}
+
 fn main() {
-    let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
+    tracing_subscriber::fmt::init();
+
+    let Args { host } = Args::parse();
+
+    let listener = TcpListener::bind(host).unwrap();
 
     let mut tree = Tree::default();
 
@@ -16,7 +28,7 @@ fn main() {
         let stream = match stream {
             Ok(stream) => stream,
             Err(err) => {
-                error!("skip. error while handle stream: {err:?}");
+                error!("error while handle stream: {err:?}; continue listening");
                 continue;
             }
         };
@@ -36,7 +48,7 @@ fn main() {
                 info!("successfully processed the connection");
             }
             Err(err) => {
-                error!("skip. error while encode respose: {err:?}");
+                error!("error while encode respose: {err:?}; continue listening");
                 continue;
             }
         }
