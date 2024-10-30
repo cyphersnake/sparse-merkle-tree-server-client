@@ -1,5 +1,5 @@
 [package]
-name = "changer"
+name = "leaf_changer"
 edition = "2021"
 
 [dependencies]

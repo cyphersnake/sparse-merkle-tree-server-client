@@ -8,6 +8,8 @@ use poly_project::{
     Tree,
 };
 
+/// Starts tree_keeper single-thread server which creates a sparse-merkle-tree and accepts
+/// leaf-change-requests from external connections
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
@@ -60,8 +62,16 @@ fn handle_request(tree: &mut Tree, reqeust: Request) -> Response {
         Request::UpdateLeaf {
             leaf_index,
             new_data,
-        } => Response::Updated {
-            proof: Box::new(tree.update_leaf(leaf_index, new_data)),
-        },
+        } => {
+            let proof = tree.update_leaf(leaf_index, new_data);
+            info!(
+                "tree updated: {old} -> {new}",
+                old = proof.root().old,
+                new = proof.root().new
+            );
+            Response::Updated {
+                proof: Box::new(proof),
+            }
+        }
     }
 }
