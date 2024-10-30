@@ -5,7 +5,7 @@ use sha3::Digest;
 use tracing::*;
 
 type Hasher = sha3::Sha3_256;
-type Data = u64;
+pub type Data = u64;
 
 pub fn hash(l: Data, r: Data) -> Data {
     let l: [u8; 8] = l.to_le_bytes();
@@ -162,7 +162,7 @@ pub struct Tree {
     default_values: [Data; DEPTH_SIZE],
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct NodeUpdate {
     /// Index of node in a level
     pub index: u32,
@@ -198,7 +198,7 @@ impl NodeUpdate {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct Proof {
     path: [NodeUpdate; DEPTH_SIZE],
 }

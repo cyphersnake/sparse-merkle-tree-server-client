@@ -1,0 +1,3 @@
+[alias]
+tree-keeper = [ "run", "--package", "tree_keeper", "--release", "--"]
+changer = [ "run", "--package", "changer", "--release", "--"]

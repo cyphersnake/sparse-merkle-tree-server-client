@@ -18,4 +18,7 @@
 /// Modified to work with `u64`, instead of `ff::PrimeField` elements
 mod sparse_merkle_tree;
 
-pub use sparse_merkle_tree::Tree;
+pub use sparse_merkle_tree::{Data, Proof, Tree};
+
+/// Module for describing the protocol between changer <-> tree_keeper
+pub mod protocol;
