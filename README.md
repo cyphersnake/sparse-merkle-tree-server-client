@@ -59,6 +59,74 @@ Let's try to consider such a system. (I'm not tied to any particular implementat
 
 Repeat these three steps for each memory change (or memory change batches) and obtain a proof for the new memory root vm. In this case, the private input is the sparse-merkle-tree-proof and the public input is the old and new merkle-tree-root.
 
+This approach makes available a merkle-tree hash function for large data buffers, since directly proving the whole tree on-circuit would be too expensive in terms of circuit size, especially for each change. In this case, we only need to prove one hash function for each level of the tree: `log(leaf_count)` once.
+
 ### Conclusion
 
 As far as I can judge, I have answered all the questions posed and justified my technology choices. But I would be glad to have any tests and discussions of my reasoning!
+
+## Implementation
+
+Due to my time constraints, I have implemented the requested functionality as simply as possible. Namely:
+
+- Took the `SparseMerkleTree` I mentioned earlier and changed the internal data type to `u64`.
+- I implemented a single-threaded server based on the standard `std::net::TcpListener` and a client based on `std::net::TcpStream`.
+- Startup configuration based on command line arguments and `clap` crate
+
+Thus the solution structure is as follows:
+
+- main crate: includes a sparse merkle tree, as well as a module with a request and response structure.
+- tree keeper: a server whose API allows changing the state of a sparse-merkle-tree
+- leaf changer: cli utility that connects to the server and sends a request for change
+
+### Possible improvements
+
+If I were asked what are the next features I would implement, I would move towards demonstrating how such a tree allows you to work with memory buffers.
+
+I.e. instead of working directly with tree & leaf at API level, migrate to working with a large memory buffer and provide evidence of changes in this memory buffer to the client in response. You could use opcode as a request to change memory at a certain offset.
+
+Also complicate the work with the network to take p2p and allow each participant of the network to change the state of files to each other on request, however, take into account the asynchronous nature of these changes.
+
+## Usage
+
+### Install
+
+Use [rustup](https://rustup.rs/)
+
+### Tree Keeper
+
+The server stores the sparse-merkle-tree and allows you to change its state via API by passing which leaf and what value to change to
+
+```console
+# Run tree-keeper server
+cargo run-tree-keeper
+
+# Argument help is also available
+cargo run-tree-keeper --help
+```
+
+### Leaf Changer
+
+This utility connects to Tree Keeper and changes the state of a particular tree leaf
+
+```console
+# Run leaf-changer cli tool
+cargo run-leaf-changer --leaf-index 10 --new-data 50
+
+# Argument help is also available
+cargo run-leaf-changer --help
+```
+
+### Development
+
+```cargo
+# Build all crates
+cargo build --workspace
+
+# Run all tests
+cargo test
+```
+
+# Conclusion
+
+The assignment was interesting, considering the breadth of freedom. I wish I could play around with ideas more due to my workload, because even with sparse-merkle-tree there's still so much more to do! Thanks for your interest in me, I'd be happy to discuss it on the call!
