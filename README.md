@@ -119,7 +119,7 @@ cargo run-leaf-changer --help
 
 ### Development
 
-```cargo
+```console
 # Build all crates
 cargo build --workspace
 
