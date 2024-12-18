@@ -22,15 +22,16 @@ pub fn hash(l: Data, r: Data) -> Data {
         result.assume_init()
     };
 
-    // Build the output data based on the first eight bytes of the hash
-    Data::from_le_bytes(
-        Hasher::digest(buffer)
-            .into_iter()
-            .take(8)
-            .collect::<Vec<_>>()
-            .try_into()
-            .unwrap(),
-    )
+    Hasher::digest(buffer)
+        .first_chunk::<8>()
+        .copied()
+        .map(Data::from_le_bytes)
+        .unwrap_or_else(|| {
+            panic!(
+                "`Hasher` outpus size is less then `8`: {}",
+                Hasher::output_size()
+            )
+        })
 }
 
 const DEPTH: u8 = 32;
